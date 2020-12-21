@@ -63,6 +63,7 @@
       <template v-slot:text-message-body="scopedProps">
         <slot
           name="text-message-body"
+          :user="scopedProps.user"
           :message="scopedProps.message"
           :messageText="scopedProps.messageText"
           :messageColors="scopedProps.messageColors"

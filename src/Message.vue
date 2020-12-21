@@ -24,6 +24,7 @@
 
       <TextMessage
         v-if="message.type === 'text'"
+        :user="user"
         :message="message"
         :message-colors="messageColors"
         :message-styling="messageStyling"
@@ -37,6 +38,7 @@
         <template v-slot:default="scopedProps">
           <slot
             name="text-message-body"
+            :user="scopedProps.user"
             :message="scopedProps.message"
             :messageText="scopedProps.messageText"
             :messageColors="scopedProps.messageColors"

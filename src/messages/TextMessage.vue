@@ -8,8 +8,8 @@
           </IconBase>
         </button>
         <button
-          v-if="showDeletion && me && message.id != null && message.id != undefined"
-          @click="
+            v-if="showDeletion && me && message.id != null && message.id != undefined"
+            @click="
             ifelse(
               showConfirmationDeletion,
               withConfirm(confirmationDeletionMessage, () => $emit('remove')),
@@ -24,7 +24,8 @@
         <slot name="text-message-toolbox" :message="message" :me="me"></slot>
       </div>
     </template>
-    <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
+    <slot :user="user" :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
+      <p style="background: red">{{ user }}</p>
       <p class="sc-message--text-content" v-html="messageText"></p>
       <p v-if="message.data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
         {{ message.data.meta }}
@@ -56,6 +57,10 @@ export default {
     IconEdit
   },
   props: {
+    user: {
+      type: Object,
+      required: true
+    },
     message: {
       type: Object,
       required: true
@@ -90,7 +95,7 @@ export default {
     }
   },
   computed: {
-    messageText() {
+    messageText () {
       const escaped = escapeGoat.escape(this.message.data.text)
 
       return Autolinker.link(this.messageStyling ? fmt(escaped) : escaped, {
@@ -98,24 +103,24 @@ export default {
         truncate: {length: 50, location: 'smart'}
       })
     },
-    me() {
+    me () {
       return this.message.author === this.myId
     },
-    isEditing() {
+    isEditing () {
       return (store.state.editMessage && store.state.editMessage.id) === this.message.id
     }
   },
   methods: {
-    edit() {
+    edit () {
       store.setState('editMessage', this.message)
     },
-    ifelse(cond, funcIf, funcElse) {
+    ifelse (cond, funcIf, funcElse) {
       return () => {
         if (funcIf && cond) funcIf()
         else if (funcElse) funcElse()
       }
     },
-    withConfirm(msg, func) {
+    withConfirm (msg, func) {
       return () => {
         if (confirm(msg)) func()
       }
