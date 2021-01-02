@@ -35,6 +35,26 @@
         >
         </slot>
       </template>
+      <template v-slot:file-message-body="scopedProps">
+        <slot
+            name="file-message-body"
+            :user="scopedProps.user"
+            :message="scopedProps.message"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
+        >
+        </slot>
+      </template>
+      <template v-slot:emoji-message-body="scopedProps">
+        <slot
+            name="emoji-message-body"
+            :user="scopedProps.user"
+            :message="scopedProps.message"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
+        >
+        </slot>
+      </template>
       <template v-slot:system-message-body="scopedProps">
         <slot name="system-message-body" :message="scopedProps.message"> </slot>
       </template>

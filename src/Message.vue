@@ -53,6 +53,7 @@
       </TextMessage>
       <EmojiMessage
         v-else-if="message.type === 'emoji'"
+        :user="user"
         :message="message"
         :message-colors="messageColors"
         :message-styling="messageStyling"
@@ -66,6 +67,7 @@
         <template v-slot:default="scopedProps">
           <slot
             name="emoji-message-body"
+            :user="user"
             :message="scopedProps.message"
             :messageColors="scopedProps.messageColors"
             :me="scopedProps.me"
@@ -79,6 +81,7 @@
       </EmojiMessage>
       <FileMessage
         v-else-if="message.type === 'file'"
+        :user="user"
         :message="message"
         :message-colors="messageColors"
         :show-deletion="showDeletion"
@@ -90,6 +93,7 @@
         <template v-slot:default="scopedProps">
           <slot
             name="file-message-body"
+            :user="user"
             :message="scopedProps.message"
             :messageColors="scopedProps.messageColors"
             :me="scopedProps.me"

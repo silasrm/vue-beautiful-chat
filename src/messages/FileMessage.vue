@@ -19,7 +19,7 @@
         <slot name="file-message-toolbox" :message="message" :me="me"></slot>
       </div>
     </template>
-    <slot :message="message" :messageColors="messageColors" :me="me">
+    <slot :user="user" :message="message" :messageColors="messageColors" :me="me">
       <div class="sc-message--file-icon">
         <img :src="message.data.file.url" class="sc-image" />
       </div>
@@ -48,6 +48,10 @@ export default {
     IconCross
   },
   props: {
+    user: {
+      type: Object,
+      required: true
+    },
     message: {
       type: Object,
       required: true

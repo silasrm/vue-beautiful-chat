@@ -19,7 +19,7 @@
         <slot name="emoji-message-toolbox" :message="message" :me="me"></slot>
       </div>
     </template>
-    <slot :message="message" :messageColors="messageColors" :me="me">
+    <slot :user="user" :message="message" :messageColors="messageColors" :me="me">
       {{ message.data.emoji }}
     </slot>
   </div>
@@ -35,6 +35,10 @@ export default {
     IconCross
   },
   props: {
+    user: {
+      type: Object,
+      required: true
+    },
     message: {
       type: Object,
       required: true
